@@ -34,6 +34,11 @@ configurations {
 dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
-	providedRuntime('org.springframework.boot:spring-boot-starter-tomcat')
+	compile('org.springframework.boot:spring-boot-starter-security')
+	compile('org.springframework.security.oauth:spring-security-oauth2')
+	/* 数据库依赖 */
+	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.16'
+	runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.35'
+
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 }
