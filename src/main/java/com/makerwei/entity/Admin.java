@@ -1,7 +1,6 @@
 package com.makerwei.entity;
 
 
-
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 
@@ -11,6 +10,9 @@ import java.util.Set;
 
 /**
  * Created by weixianbin on 16/10/12.
+ * 用户 ： 创建，读取，删除
+ * 文章 ： 创建，读取，更新，删除
+ * 评论 ： 创建，读取，删除
  */
 
 @Entity
@@ -18,7 +20,7 @@ public class Admin {
     @OneToMany(mappedBy = "admin")
     private Set<Article> articles = new HashSet<>();
     @Id
-    @GeneratedValue(strategy=GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     /* 顺序号 */
     private Long id;
     @Column(name = "username")
@@ -33,7 +35,10 @@ public class Admin {
     @Column(name = "role")
     private String role;
 
-    protected Admin() { }
+
+
+
+
     public Long getId() {
         return id;
     }
@@ -41,9 +46,6 @@ public class Admin {
     public void setId(Long id) {
         this.id = id;
     }
-
-
-
 
 
     public String getLastLoginTime() {
