@@ -24,18 +24,14 @@ public class ArticleController {
 
     @GetMapping
     public String getArticles() {
-        JSONObject response = null;
+        JSONObject response = new JSONObject();
         List<Article> articles = articleRepo.findAll();
-        if (!articles.isEmpty()) {
-            response.put("status", 200);
-            response.put("articles", articles);
-        }
         return response.toJSONString();
     }
 
     @GetMapping(value = "/{id}")
     public String getIndex(@PathVariable Long id) {
-        JSONObject response = null;
+        JSONObject response = new JSONObject();
         Article article = articleRepo.findOne(id);
         if (article != null) {
             response.put("status", 200);
@@ -44,17 +40,21 @@ public class ArticleController {
         return response.toJSONString();
     }
 
-    @RequestMapping(value = "/{id}", method = RequestMethod.DELETE)
-    public String deleteArtcle(@PathVariable Long id){
-        JSONObject response = null;
+    @DeleteMapping(value = "/{id}")
+    public String deleteArticle(@PathVariable Long id){
+        JSONObject response = new JSONObject();
         articleRepo.delete(id);
         response.put("status", 200);
         return response.toJSONString();
     }
 
-    @RequestMapping(value = "/{id}",method = RequestMethod.PUT)
+    @PutMapping(value = "/{id}")
     public String PutArticle(@PathVariable Long id){
-        JSONObject response = null;
+        JSONObject response = new JSONObject();
         return response.toJSONString();
+    }
+    @PostMapping
+    public String addArticle(){
+
     }
 }
