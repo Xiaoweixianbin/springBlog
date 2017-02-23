@@ -5,7 +5,6 @@ import com.makerwei.repository.UserRepo;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpEntity;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,12 +19,12 @@ import java.util.List;
  */
 
 @Service
-public class UserImpl {
-    protected Logger logger = LoggerFactory.getLogger(UserImpl.class);
+public class UserServiceImpl {
+    protected Logger logger = LoggerFactory.getLogger(UserServiceImpl.class);
 
     private UserRepo userRepo;
     @Autowired
-    public UserImpl(UserRepo userRepo){
+    public UserServiceImpl(UserRepo userRepo){
         this.userRepo = userRepo;
     }
 
@@ -53,10 +52,9 @@ public class UserImpl {
             return new ResponseEntity<User>(HttpStatus.NOT_FOUND);
         }
 
-        currentUser.setId(user.getId());
         currentUser.setUsername(user.getUsername());
         currentUser.setPassword(user.getPassword());
-        userRepo.saveAndFlush(currentUser);
+        userRepo.save(currentUser);
         return new ResponseEntity<User>(currentUser, HttpStatus.OK);
     }
 

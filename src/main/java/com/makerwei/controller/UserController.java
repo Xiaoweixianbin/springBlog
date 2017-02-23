@@ -1,7 +1,7 @@
 package com.makerwei.controller;
 import com.alibaba.fastjson.JSON;
 import com.makerwei.entity.User;
-import com.makerwei.service.UserImpl;
+import com.makerwei.service.UserServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -17,36 +17,36 @@ public class UserController {
 
 
   @Autowired
-  private UserImpl userImpl;
+  private UserServiceImpl userServiceImpl;
 
   @PostMapping(consumes = "application/json; charset=utf-8")
   public ResponseEntity<User> register(@RequestBody String user) {
     User newUser = JSON.parseObject(user, User.class);
-    return userImpl.create(newUser);
+    return userServiceImpl.create(newUser);
   }
 
 
 
   @GetMapping(value = "/{id}", produces = "application/json; charset=utf-8")
   public ResponseEntity<User> getUser(@PathVariable Long id) {
-    return userImpl.getUser(id);
+    return userServiceImpl.getUser(id);
   }
 
 
   @GetMapping(produces = "application/json; charset=utf-8")
   public ResponseEntity<List<User>> getUserList() {
-    return userImpl.getUserList();
+    return userServiceImpl.getUserList();
   }
 
 
   @DeleteMapping(value = "/{id}", produces = "application/json; charset=utf-8")
   public ResponseEntity<User> deleteUser(@PathVariable Long id) {
-    return userImpl.delete(id);
+    return userServiceImpl.delete(id);
   }
 
   @PutMapping(value = "{id}", consumes = "application/json; charset=utf-8")
   public ResponseEntity<User> updateUser(@PathVariable Long id, @RequestBody String user) {
     User newUser = JSON.parseObject(user, User.class);
-    return userImpl.update(id, newUser);
+    return userServiceImpl.update(id, newUser);
   }
 }
