@@ -34,11 +34,11 @@ public class ArticleController {
      * @return
      */
     @GetMapping
-    public String getArticles() {
+    public List<Article> getArticles() {
         JSONObject response = new JSONObject();
         List<Article> articles = articleRepo.findAll();
         response.put("articles",articles);
-        return response.toJSONString();
+        return articles;
     }
 
 

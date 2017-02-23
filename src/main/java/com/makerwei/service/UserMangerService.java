@@ -1,11 +1,9 @@
 package com.makerwei.service;
 
-import com.makerwei.entity.Admin;
-import com.makerwei.repository.AdminRepo;
-import org.slf4j.LoggerFactory;
+import com.makerwei.entity.User;
+import com.makerwei.repository.UserRepo;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
@@ -20,17 +18,17 @@ import java.util.List;
 @Service
 public class UserMangerService implements UserDetailsService {
     @Autowired
-    private AdminRepo adminRepo;
+    private UserRepo userRepo;
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Admin admin = adminRepo.findByUsername(username);
-        if (admin == null){
+        User user = userRepo.findByUsername(username);
+        if (user == null){
             throw new UsernameNotFoundException(username + "not found");
         }
 
         List<SimpleGrantedAuthority> authorities = new ArrayList<>();
         authorities.add(new SimpleGrantedAuthority("USER"));
-        System.out.print("__________++++++"+admin.getUsername()+admin.getPassword());
-        return new User(admin.getUsername(),admin.getPassword(),authorities);
+        System.out.print("__________++++++"+ user.getUsername()+ user.getPassword());
+        return new org.springframework.security.core.userdetails.User(user.getUsername(), user.getPassword(),authorities);
     }
 }

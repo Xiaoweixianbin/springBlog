@@ -5,6 +5,7 @@ import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import org.hibernate.annotations.Cache;
 
 import javax.persistence.*;
+import java.util.Date;
 import java.util.HashSet;
 import java.util.Set;
 
@@ -16,8 +17,8 @@ import java.util.Set;
  */
 
 @Entity
-public class Admin {
-    @OneToMany(mappedBy = "admin")
+public class User {
+    @OneToMany(mappedBy = "user",cascade = CascadeType.ALL)
     private Set<Article> articles = new HashSet<>();
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -29,12 +30,19 @@ public class Admin {
     @Column(name = "password")
     /* 用户密码 */
     private String password;
-    @Column(name = "lastlogintime")
     /* 上次登录时间 */
-    private String lastLoginTime;
+    @Temporal(TemporalType.TIMESTAMP)
+    @Column(name = "lastLoginTime")
+    private Date lastLoginTime;
+    /* 角色 */
     @Column(name = "role")
     private String role;
 
+
+    @PrePersist
+    protected void onUpdate(){
+        this.lastLoginTime = new Date();
+    }
 
 
 
@@ -48,13 +56,6 @@ public class Admin {
     }
 
 
-    public String getLastLoginTime() {
-        return lastLoginTime;
-    }
-
-    public void setLastLoginTime(String lastLoginTime) {
-        this.lastLoginTime = lastLoginTime;
-    }
 
     public String getRole() {
         return role;
@@ -86,5 +87,13 @@ public class Admin {
 
     public void setArticles(Set<Article> articles) {
         this.articles = articles;
+    }
+
+    public Date getLastLoginTime() {
+        return lastLoginTime;
+    }
+
+    public void setLastLoginTime(Date lastLoginTime) {
+        this.lastLoginTime = lastLoginTime;
     }
 }

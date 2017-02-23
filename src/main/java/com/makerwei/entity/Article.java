@@ -1,9 +1,10 @@
 package com.makerwei.entity;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 
 import javax.persistence.*;
-import java.util.List;
 
 /**
  * Created by weixianbin on 16/10/12.
@@ -11,7 +12,10 @@ import java.util.List;
 @Entity
 public class Article {
     @ManyToOne
-    private Admin admin;
+    @JoinColumn(name = "user_id")
+    @JsonIgnore
+    //@JsonIdentityInfo(generator = ObjectIdGenerators.PropertyGenerator.class,property="id", scope=Article.class)
+    private User user;
 
     @Id
     @GeneratedValue(strategy=GenerationType.AUTO)
@@ -71,11 +75,11 @@ public class Article {
         this.tags = tags;
     }
 
-    public Admin getAdmin() {
-        return admin;
+    public User getUser() {
+        return user;
     }
 
-    public void setAdmin(Admin admin) {
-        this.admin = admin;
+    public void setUser(User user) {
+        this.user = user;
     }
 }
