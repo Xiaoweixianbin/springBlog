@@ -1,9 +1,6 @@
 package com.makerwei.entity;
 
 
-import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.hibernate.annotations.Cache;
-
 import javax.persistence.*;
 import java.util.Date;
 import java.util.HashSet;
@@ -45,7 +42,13 @@ public class User {
     }
 
 
+    public Set<Article> getArticles() {
+        return articles;
+    }
 
+    public void setArticles(Set<Article> articles) {
+        this.articles = articles;
+    }
 
     public Long getId() {
         return id;
@@ -53,16 +56,6 @@ public class User {
 
     public void setId(Long id) {
         this.id = id;
-    }
-
-
-
-    public String getRole() {
-        return role;
-    }
-
-    public void setRole(String role) {
-        this.role = role;
     }
 
     public String getUsername() {
@@ -81,19 +74,19 @@ public class User {
         this.password = password;
     }
 
-    public Set<Article> getArticles() {
-        return articles;
-    }
-
-    public void setArticles(Set<Article> articles) {
-        this.articles = articles;
-    }
-
     public Date getLastLoginTime() {
         return lastLoginTime;
     }
 
     public void setLastLoginTime(Date lastLoginTime) {
         this.lastLoginTime = lastLoginTime;
+    }
+
+    public String getRole() {
+        return role;
+    }
+
+    public void setRole(String role) {
+        this.role = role;
     }
 }

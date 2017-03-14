@@ -31,7 +31,7 @@ public class UserServiceImpl {
 
     public ResponseEntity<User> create(User user){
         if (user == null){
-            throw new UsernameNotFoundException("It have some problems");
+            throw new UsernameNotFoundException("It haves some problems");
         }
         User saved = userRepo.save(user);
         return new ResponseEntity<User>(saved, HttpStatus.CREATED);

@@ -31,7 +31,7 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
  */
 @Configurable
 @EnableWebSecurity
-@EnableOAuth2Client
+
 
 public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 

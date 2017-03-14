@@ -10,8 +10,7 @@ import org.springframework.security.oauth2.config.annotation.web.configurers.Res
 /**
  * Created by weixianbin on 16/11/1.
  */
-@Configuration
-@EnableResourceServer
+
 public class ResourceServer extends ResourceServerConfigurerAdapter {
     public static final String RESOURCE_ID = "blog_makerwei";
     @Override
@@ -23,6 +22,7 @@ public class ResourceServer extends ResourceServerConfigurerAdapter {
                 .anyRequest()
                 .access("#oauth2.hasScope('read')");
     }
+
 
     @Override
     public void configure(ResourceServerSecurityConfigurer resources) throws Exception {

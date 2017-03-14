@@ -13,10 +13,9 @@ buildscript {
 apply plugin: 'java'
 apply plugin: 'eclipse-wtp'
 apply plugin: 'spring-boot'
-apply plugin: 'war'
 
 
-war {
+jar {
 	baseName = 'demo'
 	version = '0.0.1-SNAPSHOT'
 }
@@ -36,6 +35,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('org.springframework.boot:spring-boot-starter-security')
 	compile('org.springframework.security.oauth:spring-security-oauth2')
+	//providedRuntime("org.springframework.boot:spring-boot-starter-tomcat")
 	/* 数据库依赖 */
 	compile group: 'com.alibaba', name: 'fastjson', version: '1.2.16'
 	runtime group: 'mysql', name: 'mysql-connector-java', version: '5.1.35'

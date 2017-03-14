@@ -3,6 +3,7 @@ package com.makerwei.entity;
 import com.fasterxml.jackson.annotation.JsonIdentityInfo;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.ObjectIdGenerators;
+import lombok.Data;
 
 import javax.persistence.*;
 
@@ -34,7 +35,15 @@ public class Article {
     /* 内容 */
     private String info;
 
-    protected Article() { }
+
+    public User getUser() {
+        return user;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
+    }
+
     public Long getId() {
         return id;
     }
@@ -59,14 +68,6 @@ public class Article {
         this.time = time;
     }
 
-    public String getInfo() {
-        return info;
-    }
-
-    public void setInfo(String info) {
-        this.info = info;
-    }
-
     public String getTags() {
         return tags;
     }
@@ -75,11 +76,11 @@ public class Article {
         this.tags = tags;
     }
 
-    public User getUser() {
-        return user;
+    public String getInfo() {
+        return info;
     }
 
-    public void setUser(User user) {
-        this.user = user;
+    public void setInfo(String info) {
+        this.info = info;
     }
 }
